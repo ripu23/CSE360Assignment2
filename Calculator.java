@@ -1,4 +1,8 @@
 package cse360assign2;
+
+import java.util.LinkedList;
+import java.util.List;
+
 /*============================================================================
 Name        : Calculator.java
 Author      : Ripudaman Teja
@@ -38,8 +42,15 @@ public class Calculator {
 	
 	private int total;
 	
+	/**
+	 * List to maintain history of operations
+	 */
+	private List<String> history;
+	
 	public Calculator () {
-		total = 0;  
+		total = 0;
+		history = new LinkedList<>();
+		history.add("0");
 	}
 	
 	/**
@@ -59,6 +70,7 @@ public class Calculator {
 	 * 
 	 */
 	public void add (int value) {
+		history.add(" + " + value);
 		total += value;
 	}
 	
@@ -69,6 +81,7 @@ public class Calculator {
 	 * 
 	 */
 	public void subtract (int value) {
+		history.add(" - " + value);
 		total -= value;
 	}
 	
@@ -79,6 +92,7 @@ public class Calculator {
 	 * 
 	 */
 	public void multiply (int value) {
+		history.add(" * " + value);
 		total *= value;
 	}
 	
@@ -95,16 +109,22 @@ public class Calculator {
 		}else {
 			total /= value;
 		}
+		history.add(" / " + value);
 	}
 	
 	/**
-	 * <p>Returns the history of current operations performed
+	 * <p>Returns the history of operations performed
 	 * so far.
 	 * 
 	 * @return String
 	 * 
 	 */
 	public String getHistory () {
-		return "";
+		String result = "";
+		
+		for(String operations : history) {
+			result += operations;
+		}
+		return result;
 	}
 }
